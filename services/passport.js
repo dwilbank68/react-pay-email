@@ -20,7 +20,8 @@ passport.deserializeUser((userId, done) => {
 const googStrategyObj = {
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/auth/google/callback',
+    proxy: true
 };
 
 const OAuthCallback = (accessToken, refreshToken, profile, done) => {

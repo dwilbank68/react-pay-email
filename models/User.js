@@ -2,7 +2,11 @@ var mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 var UserSchema = new Schema({
-    googleId: String
+    googleId: String,
+    credits: {
+        type: Number,
+        default: 0
+    }
     // name: String,
     // roomNumber:{
     //     type: String,

@@ -8,16 +8,22 @@ module.exports = (app) => {
 
     // route that Google calls back to (with a code), which triggers passport to query Google
     // again (with the code) in order to get user information
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get(
+        '/auth/google/callback',
+        passport.authenticate('google'),
+        (req, res) => {
+            res.redirect('/surveys');
+        }
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     })
 
     app.get('/api/current_user', (req,res) => {
         res.send(req.user);
-    })
+      })
 
 }
 

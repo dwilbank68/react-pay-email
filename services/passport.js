@@ -24,21 +24,13 @@ const googStrategyObj = {
     proxy: true
 };
 
-const OAuthCallback = (accessToken, refreshToken, profile, done) => {
-    User
-        .findOne({googleId: profile.id})
-        .then((existingUser) => {
-            if (existingUser){
-                done(null, existingUser);
-            } else {
-                new User({ googleId: profile.id })
-                    .save()
-                    .then(user => done(null, user))
-                    // when done is called, user obj is sent to serializeUser
-            }
-        })
+const OAuthCallback = async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({googleId: profile.id});
+    if (existingUser) return done(null, existingUser);
 
-
+    const user = await new User({ googleId: profile.id }).save();
+    done(null, user);
+    // when done is called, user obj is sent to serializeUser
 }
 
 const googleStrategy = new GoogleStrategy(googStrategyObj, OAuthCallback);

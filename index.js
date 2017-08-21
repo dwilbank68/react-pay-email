@@ -26,7 +26,22 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
-app.listen(process.env.PORT || 5000, function() {
+if (process.env.NODE_ENV === 'production') {
+    // when a route is received requesting specific files,
+    // serve up production assets (main.js, main.css)
+    app.use(express.static('client/build'));
+
+    // when a route is received that is not defined in express,
+    // (for the front-end) serve up index.html file
+    const path = require('path');
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, function() {
     console.log('listening on port 5000');
 });
 

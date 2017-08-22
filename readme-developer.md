@@ -32,3 +32,13 @@
     npm uninstall --save-dev react-scripts
     npm i --save react-scripts
     
+    HEROKU ENV VARIABLES
+    
+    COOKIE_KEY
+    GOOGLE_CLIENT_ID
+    GOOGLE_CLIENT_SECRET
+    MONGO_URI
+    STRIPE_PUBLISHABLE_KEY
+    STRIPE_SECRET_KEY
+    REACT_APP_STRIPE_KEY
+    

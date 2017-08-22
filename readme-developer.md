@@ -23,9 +23,12 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false 
                             npm install --prefix client &&
                              npm run build --prefix client"
-                            
-                             or
-                             
-    "heroku-postbuild": "npm install --only=dev --prefix client &&
-                            npm install --prefix client && 
-                            npm run build --prefix client
+    
+       
+    if react-scripts is not found during deployment post-build,
+    
+     // client directory
+     
+    npm uninstall --save-dev react-scripts
+    npm i --save react-scripts
+    

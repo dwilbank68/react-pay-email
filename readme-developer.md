@@ -23,3 +23,9 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false 
                             npm install --prefix client &&
                              npm run build --prefix client"
+                            
+                             or
+                             
+    "heroku-postbuild": "npm install --only=dev --prefix client &&
+                            npm install --prefix client && 
+                            npm run build --prefix client

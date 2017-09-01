@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import {BrowserRouter, Route } from 'react-router-dom';
 
 import * as actions from '../actions/actionsIndex';
+import Dashboard from'./Dashboard';
 
 // import App from './App.jsx';
 // const App = (props) => {
 
 import Header from './Header';
 import Landing from './Landing';;
-const Dashboard = () => <h2>Dashboard</h2>;
+
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
 class App extends Component {

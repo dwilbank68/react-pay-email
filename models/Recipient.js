@@ -1,37 +1,12 @@
 var mongoose = require("mongoose");
 const {Schema} = mongoose;
 
-var SurveySchema = new Schema({
-    title: String,
-    body: String,
-    subject: String,
-    recipients: [String],
-    yes: {type:Number, default:0},
-    no: {type:Number, default:0}
-
-    // name: String,
-    // roomNumber:{
-    //     type: String,
-    //     required: 'Please enter room number',
-    //     min:[100,'Not valid']
-    // },
-    // username: {
-    //     type: String,
-    //     required: true,
-    //     index: { unique: true }
-    // },
-    // // name: { first: String, last: String },
-    // email: {
-    //     type: String,
-    //     required: true,
-    //     match: /.+@.+\..+/,
-    //     lowercase: true 									// 1
-    // },
-    // password: { type: String, required: true, select: false },
-    // created:  { type: Date, default: Date.now }
+var RecipientSchema = new Schema({
+    email: String,
+    responded: {type: Boolean, default: false}
 });
 
-// SurveySchema
+// RecipientSchema
 //     .pre('save', function(next) {
 //         var user = this;
 //         if(!user.isModified('password')) return next();
@@ -42,14 +17,14 @@ var SurveySchema = new Schema({
 //         })
 //     })
 //
-// SurveySchema
+// RecipientSchema
 //     .methods
 //     .comparePassword = function(password) {
 //     var user = this;
 //     return bcrypt.compareSync(password, user.password);
 // };
 
-module.exports = mongoose.model('surveys', SurveySchema);
+module.exports = RecipientSchema;
 
 // 1 - type:String gives you functions like trim, lowercase, uppercase
 // 1 - lowercase converts all entries to lowercase so that 'Joe' and 'joe'

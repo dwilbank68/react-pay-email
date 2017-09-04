@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {BrowserRouter, Route } from 'react-router-dom';
 
 import * as actions from '../actions/actionsIndex';
 import Dashboard from'./Dashboard';
+import SurveyNew from'./surveys/SurveyNew';
 
 // import App from './App.jsx';
 // const App = (props) => {
 
 import Header from './Header';
 import Landing from './Landing';;
-
-const SurveyNew = () => <h2>SurveyNew</h2>;
 
 class App extends Component {
 
@@ -25,7 +23,7 @@ class App extends Component {
         return (
             <div className="app container">
                 <BrowserRouter>
-                    <div>
+                    <div className="container">
                         <Header/>
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/surveys" component={Dashboard} />

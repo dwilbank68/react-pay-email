@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 // or 'react-router', if version < 4
 // import {connect} from 'react-redux';

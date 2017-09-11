@@ -1,21 +1,21 @@
-import { FETCH_USER} from '../actions/types';
+import { FETCH_SURVEYS} from '../actions/types';
 
-let defaultState = null;
+let defaultState = [];
 
-var authReducer = (state=defaultState, action) => {
+var surveysReducer = (state=defaultState, action) => {
     switch(action.type){
-        case FETCH_USER: return action.payload || false;
+        case FETCH_SURVEYS: return action.payload;
         default: return state;
     };
 };
 
-export default authReducer;
+export default surveysReducer;
 
-////////// paste this in index.js - authReducer //////////////
+////////// paste this in index.js - surveysReducer //////////////
 
-// import authReducer from './authReducer';
+// import surveysReducer from './surveysReducer';
 
-// authReducer: authReducer
+// surveysReducer: surveysReducer
 
 //////////// paste this in test ///////////////
 
@@ -24,12 +24,12 @@ export default authReducer;
 
 // var reducers = require("reducers");
 
-// describe('authReducer', () => {
+// describe('surveysReducer', () => {
 //    it('should ', () => {
 //        var action = {
 //            type: DO_IT
 //        }
-//        var res = reducers.authReducer(df(), df(action));
+//        var res = reducers.surveysReducer(df(), df(action));
 //        expect(res).toEqual();
 //    });
 // });

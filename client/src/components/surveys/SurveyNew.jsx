@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {reduxForm} from 'redux-form';
-// import { connect } from 'react-redux';
+import {reduxForm, reset} from 'redux-form';
+import { connect } from 'react-redux';
 // import * as actions from '../actions/actionsIndex';
 
 // import { bindActionCreators } from 'redux';
 
 import SurveyForm from './SurveyForm.jsx';
 import SurveyFormReview from './SurveyFormReview.jsx';
+
+
 
 class SurveyNew extends Component {
 
@@ -17,6 +19,11 @@ class SurveyNew extends Component {
     //     }
     //    this.handleClick = this.handleClick.bind(this)
     // }
+
+    componentWillUnmount() {
+        this.props.dispatch(reset('surveyForm'));
+    }
+
 
     state = {showFormReview: false};
 
@@ -43,6 +50,8 @@ class SurveyNew extends Component {
     }
 }
 
-export default reduxForm(
-    {form:'surveyForm'}
-)(SurveyNew);
+const options = { form:'surveyForm' }
+const connectedComponent = connect(null, null)(SurveyNew);
+
+
+export default reduxForm(options)(connectedComponent);

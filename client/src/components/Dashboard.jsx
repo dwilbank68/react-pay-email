@@ -2,22 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 // or 'react-router', if version < 4
 // import {connect} from 'react-redux';
+import SurveyList from './surveys/SurveyList';
 
-// import Dashboard from './Dashboard.jsx';
-// const Dashboard = (props) => {
 const Dashboard = ({whatever1, whatever2}) => {
-
-    // no lifecycle methods
-    // no refs
-
-    const methodName = (e) => {
-        //
-    }
 
     return (
         <div className="dashboard">
             <div >
-                Dashboard
+                <SurveyList/>
                 <div className="fixed-action-btn">
                     <Link   className="btn-floating btn-large red"
                             to="/surveys/new">

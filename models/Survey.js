@@ -15,26 +15,6 @@ var SurveySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }
-    // name: String,
-    // roomNumber:{
-    //     type: String,
-    //     required: 'Please enter room number',
-    //     min:[100,'Not valid']
-    // },
-    // username: {
-    //     type: String,
-    //     required: true,
-    //     index: { unique: true }
-    // },
-    // // name: { first: String, last: String },
-    // email: {
-    //     type: String,
-    //     required: true,
-    //     match: /.+@.+\..+/,
-    //     lowercase: true 									// 1
-    // },
-    // password: { type: String, required: true, select: false },
-    // created:  { type: Date, default: Date.now }
 });
 
 // SurveySchema

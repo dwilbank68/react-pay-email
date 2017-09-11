@@ -1,24 +1,13 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-// or 'react-router', if version < 4
-import {Field, reduxForm} from 'redux-form';
+import PropTypes from 'prop-types';
 
-import SurveyField from './SurveyField';
-import validateEmails from '../../utils/validateEmails'
-
-import FIELDS from './formFields';
-
-// import { connect } from 'react-redux';
-// import * as actions from '../actions/actionsIndex';
+import { connect } from 'react-redux';
+import {fetchSurveys} from '../../actions/actionsIndex';
 
 // import { bindActionCreators } from 'redux';
 
-// import SurveyForm from './SurveyForm.jsx';
-
-
-
-class SurveyForm extends Component {
+// import SurveyList from './SurveyList.jsx';
+class SurveyList extends Component {
 
     // constructor(props, context){
     //     super(props, context);
@@ -28,6 +17,8 @@ class SurveyForm extends Component {
     //    this.handleClick = this.handleClick.bind(this)
     // }
 
+    // state = { whatever: false }; // if using create-react-app
+
     // handleClick(e) {
     //
     //    this.setState({
@@ -35,43 +26,46 @@ class SurveyForm extends Component {
     //    })
     // }
 
-    renderFields(){
-        return _.map(FIELDS, ({label, name}) => {
-            return (
-                <Field  component={SurveyField}
-                        type="text"
-                        key={name}
-                        label={label}
-                        name={name} />
-            )
-        })
+    componentDidMount() {
+        this.props.fetchSurveys();
     }
+
 
     render() {
         return (
-            <div className="survey-form">
-                <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
-                    {this.renderFields()}
-                    <Link   to="/surveys"
-                            className="red btn-flat white-text">
-                        Cancel
-                    </Link>
-                    <button     className="teal btn-flat right white-text"
-                                type="submit">
-                        Submit
-                        <i className="material-icons right">
-                            done
-                        </i>
-                    </button>
-                </form>
-
+            <div className="survey-list">
+                {this.renderSurveys()}
             </div>
         );
     }
+
+    renderSurveys() {
+        return this.props.surveys.map( survey => {
+            return (
+                <div className="card blue-grey darken-1" key={survey._id}>
+                    <div className="card-content white-text">
+                        <span className="card-title">
+                            {survey.title}
+                        </span>
+                        <p>
+                            {survey.body}
+                        </p>
+                        <p className="right">
+                            Send On: {new Date(survey.dateSent).toLocaleDateString()}
+                        </p>
+                    </div>
+                    <div className="card-action">
+                        <a href="#">Yes: {survey.yes}</a>
+                        <a href="#">No: {survey.no}</a>
+                    </div>
+                </div>
+            )
+        })
+    }
 }
 
-// SurveyForm.defaultProps = {};
-// SurveyForm.propTypes = {
+// SurveyList.defaultProps = {};
+// SurveyList.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -117,13 +111,9 @@ class SurveyForm extends Component {
 
 ///////////////////////////// mapStateToProps //////////////////////////////
 
-// function mapStateToProps(state, ownProps) {
-//     return { whatever: state.whatever }
-// }
-//
-// const mapStateToProps = state => ({
-//     articles: state.articles
-// });
+function mapStateToProps(state, ownProps) {
+    return { surveys: state.surveys }
+}
 
 ///////////////////////////// context //////////////////////////////
 
@@ -132,35 +122,14 @@ class SurveyForm extends Component {
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-
-// export default connect()(SurveyForm);
-// export default SurveyForm;
-
-function validate (v){
-    const errors = {};
-
-    errors.recipients = validateEmails(v.recipients || '');
-
-    _.each(FIELDS, ({name}) => {
-        if (!v[name]) errors[name] = 'You must provide a value';
-    })
-
-    return errors;
-}
-
-const options = {
-    form: 'SurveyForm',
-    destroyOnUnmount: false,                            // 1
-    validate
-}
-
-export default reduxForm(options)(SurveyForm)
+// export default SurveyList;
+// export default connect()(SurveyList);
 // if 'import * as actions from '../actions/actionsIndex';'
-//     export default connect(null, actions)(SurveyForm);
+//     export default connect(null, actions)(SurveyList);
 
-// export default connect(mapStateToProps, () => ({}))(SurveyForm);
-// export default connect(mapStateToProps, mapDispatchToProps)(SurveyForm);
-// export default connect(mapStateToProps, { nameOfImportedAction })(SurveyForm);
+// export default connect(mapStateToProps, () => ({}))(SurveyList);
+// export default connect(mapStateToProps, mapDispatchToProps)(SurveyList);
+export default connect(mapStateToProps, { fetchSurveys })(SurveyList);
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

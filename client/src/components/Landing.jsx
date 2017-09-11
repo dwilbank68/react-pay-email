@@ -1,15 +1,6 @@
 import React from 'react';
 
-
-// import Landing from './Landing.jsx';
-// const Landing = (props) => {
 const Landing = ({whatever1, whatever2}) => {
-    // no lifecycle methods
-    // no refs
-
-    const methodName = (e) => {
-        //
-    }
 
     return (
         <div className="landing" style={{textAlign: 'center'}}>
